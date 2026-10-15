@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TrainingMentalRouteImport } from './routes/training.mental'
+import { Route as TrainingPhysicalRouteImport } from './routes/training.physical'
+import { Route as TrainingTacticalRouteImport } from './routes/training.tactical'
+import { Route as TrainingTechnicalRouteImport } from './routes/training.technical'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrainingMentalRoute = TrainingMentalRouteImport.update({
+  id: '/training/mental',
+  path: '/training/mental',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainingPhysicalRoute = TrainingPhysicalRouteImport.update({
+  id: '/training/physical',
+  path: '/training/physical',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainingTacticalRoute = TrainingTacticalRouteImport.update({
+  id: '/training/tactical',
+  path: '/training/tactical',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainingTechnicalRoute = TrainingTechnicalRouteImport.update({
+  id: '/training/technical',
+  path: '/training/technical',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/training/mental': typeof TrainingMentalRoute
+  '/training/physical': typeof TrainingPhysicalRoute
+  '/training/tactical': typeof TrainingTacticalRoute
+  '/training/technical': typeof TrainingTechnicalRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/training/mental': typeof TrainingMentalRoute
+  '/training/physical': typeof TrainingPhysicalRoute
+  '/training/tactical': typeof TrainingTacticalRoute
+  '/training/technical': typeof TrainingTechnicalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/training/mental': typeof TrainingMentalRoute
+  '/training/physical': typeof TrainingPhysicalRoute
+  '/training/tactical': typeof TrainingTacticalRoute
+  '/training/technical': typeof TrainingTechnicalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/training/mental'
+    | '/training/physical'
+    | '/training/tactical'
+    | '/training/technical'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/training/mental'
+    | '/training/physical'
+    | '/training/tactical'
+    | '/training/technical'
+  id:
+    | '__root__'
+    | '/'
+    | '/training/mental'
+    | '/training/physical'
+    | '/training/tactical'
+    | '/training/technical'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TrainingMentalRoute: typeof TrainingMentalRoute
+  TrainingPhysicalRoute: typeof TrainingPhysicalRoute
+  TrainingTacticalRoute: typeof TrainingTacticalRoute
+  TrainingTechnicalRoute: typeof TrainingTechnicalRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/training/mental': {
+      id: '/training/mental'
+      path: '/training/mental'
+      fullPath: '/training/mental'
+      preLoaderRoute: typeof TrainingMentalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training/physical': {
+      id: '/training/physical'
+      path: '/training/physical'
+      fullPath: '/training/physical'
+      preLoaderRoute: typeof TrainingPhysicalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training/tactical': {
+      id: '/training/tactical'
+      path: '/training/tactical'
+      fullPath: '/training/tactical'
+      preLoaderRoute: typeof TrainingTacticalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/training/technical': {
+      id: '/training/technical'
+      path: '/training/technical'
+      fullPath: '/training/technical'
+      preLoaderRoute: typeof TrainingTechnicalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TrainingMentalRoute: TrainingMentalRoute,
+  TrainingPhysicalRoute: TrainingPhysicalRoute,
+  TrainingTacticalRoute: TrainingTacticalRoute,
+  TrainingTechnicalRoute: TrainingTechnicalRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
