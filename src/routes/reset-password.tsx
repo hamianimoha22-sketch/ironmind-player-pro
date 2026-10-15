@@ -35,12 +35,12 @@ function ResetPage() {
   }, []);
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (pw.length < 8) return toast.error("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
-    if (pw !== pw2) return toast.error("كلمتا المرور غير متطابقتين");
+    if (pw.length < 8) return void toast.error("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
+    if (pw !== pw2) return void toast.error("كلمتا المرور غير متطابقتين");
     setBusy(true);
     const { error } = await supabase.auth.updateUser({ password: pw });
     setBusy(false);
-    if (error) return toast.error(arabicAuthError(error.message));
+    if (error) return void toast.error(arabicAuthError(error.message));
     toast.success("تم تحديث كلمة المرور");
     navigate({ to: "/dashboard" });
   }

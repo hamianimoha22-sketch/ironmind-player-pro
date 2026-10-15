@@ -26,13 +26,13 @@ function ContactPage() {
   const [busy, setBusy] = useState(false);
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!f.name.trim() || f.name.length > 100) return toast.error("أدخل اسمك");
-    if (!/^\S+@\S+\.\S+$/.test(f.email)) return toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
-    if (f.message.trim().length < 5 || f.message.length > 2000) return toast.error("اكتب رسالة واضحة (5 إلى 2000 حرف)");
+    if (!f.name.trim() || f.name.length > 100) return void toast.error("أدخل اسمك");
+    if (!/^\S+@\S+\.\S+$/.test(f.email)) return void toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
+    if (f.message.trim().length < 5 || f.message.length > 2000) return void toast.error("اكتب رسالة واضحة (5 إلى 2000 حرف)");
     setBusy(true);
     const { error } = await supabase.from("contact_messages").insert({ name: f.name.trim(), email: f.email.trim(), message: f.message.trim() });
     setBusy(false);
-    if (error) return toast.error("تعذر إرسال الرسالة، حاول مجددًا");
+    if (error) return void toast.error("تعذر إرسال الرسالة، حاول مجددًا");
     toast.success("تم إرسال رسالتك بنجاح");
     setF({ name: "", email: "", message: "" });
   }

@@ -39,7 +39,7 @@ function ExercisePage() {
             <Link to="/" className="text-primary">العودة للرئيسية</Link>
           </EmptyState>
         ) : (
-          <ExerciseView e={q.data} categoryName={q.data.categories?.name_ar} />
+          <ExerciseView e={q.data} categoryName={q.data.categories?.name_ar ?? ""} />
         )}
       </div>
     </PageShell>
