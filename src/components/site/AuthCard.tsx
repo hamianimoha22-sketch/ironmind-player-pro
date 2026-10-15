@@ -22,7 +22,7 @@ export function AuthCard({ title, subtitle, children, wide }: { title: string; s
 export function GoogleButton() {
   return (
     <Button type="button" variant="outline" className="w-full" onClick={async () => {
-      const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/dashboard" === "" ? window.location.origin : window.location.origin });
+      const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
       if (r.error) toast.error("تعذر تسجيل الدخول عبر Google");
     }}>
       المتابعة باستخدام Google
