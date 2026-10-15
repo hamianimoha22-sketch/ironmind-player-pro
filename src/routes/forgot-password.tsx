@@ -27,11 +27,11 @@ function ForgotPage() {
   const [sent, setSent] = useState(false);
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!/^\S+@\S+\.\S+$/.test(email)) return toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
+    if (!/^\S+@\S+\.\S+$/.test(email)) return void toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
     setBusy(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/reset-password` });
     setBusy(false);
-    if (error) return toast.error(arabicAuthError(error.message));
+    if (error) return void toast.error(arabicAuthError(error.message));
     setSent(true);
   }
   return (

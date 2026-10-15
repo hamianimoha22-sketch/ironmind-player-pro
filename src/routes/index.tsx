@@ -65,7 +65,7 @@ function Index() {
         <h2 className="text-2xl font-bold sm:text-3xl">أنواع التدريب</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TRAINING_TYPES.map((t, i) => {
-            const Icon = icons[i];
+            const Icon = icons[i]!;
             return (
               <Link key={t.key} to={t.path} className="group rounded-xl border border-border bg-card p-5 transition hover:border-primary/60">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/15 text-primary"><Icon className="h-5 w-5" /></div>

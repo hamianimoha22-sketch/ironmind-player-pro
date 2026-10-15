@@ -32,15 +32,15 @@ function SignupPage() {
 
   function next(e: React.FormEvent) {
     e.preventDefault();
-    if (!/^\S+@\S+\.\S+$/.test(email)) return toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
-    if (password.length < 8) return toast.error("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
+    if (!/^\S+@\S+\.\S+$/.test(email)) return void toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
+    if (password.length < 8) return void toast.error("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
     setStep(2);
   }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const err = validateProfile(profile);
-    if (err) return toast.error(err);
+    if (err) return void toast.error(err);
     setBusy(true);
     const { error } = await supabase.auth.signUp({
       email: email.trim(),
@@ -48,7 +48,7 @@ function SignupPage() {
       options: { emailRedirectTo: window.location.origin + "/dashboard", data: { ...toDbProfile(profile) } },
     });
     setBusy(false);
-    if (error) return toast.error(arabicAuthError(error.message));
+    if (error) return void toast.error(arabicAuthError(error.message));
     setSent(true);
   }
 

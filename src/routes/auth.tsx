@@ -29,12 +29,12 @@ function LoginPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!/^\S+@\S+\.\S+$/.test(email)) return toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
-    if (!password) return toast.error("أدخل كلمة المرور");
+    if (!/^\S+@\S+\.\S+$/.test(email)) return void toast.error("أدخل بريدًا إلكترونيًا صحيحًا");
+    if (!password) return void toast.error("أدخل كلمة المرور");
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setBusy(false);
-    if (error) return toast.error(arabicAuthError(error.message));
+    if (error) return void toast.error(arabicAuthError(error.message));
     toast.success("تم تسجيل الدخول بنجاح");
     navigate({ to: "/dashboard" });
   }
