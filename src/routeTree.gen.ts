@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExercisesIdRouteImport } from './routes/exercises.$id'
 import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
+import { Route as ProgramsIdRouteImport } from './routes/programs.$id'
 import { Route as TrainingMentalRouteImport } from './routes/training.mental'
 import { Route as TrainingPhysicalRouteImport } from './routes/training.physical'
 import { Route as TrainingTacticalRouteImport } from './routes/training.tactical'
@@ -30,6 +31,11 @@ const ExercisesIdRoute = ExercisesIdRouteImport.update({
 const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
   id: '/programs/',
   path: '/programs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsIdRoute = ProgramsIdRouteImport.update({
+  id: '/programs/$id',
+  path: '/programs/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingMentalRoute = TrainingMentalRouteImport.update({
@@ -56,6 +62,7 @@ const TrainingTechnicalRoute = TrainingTechnicalRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exercises/$id': typeof ExercisesIdRoute
+  '/programs/$id': typeof ProgramsIdRoute
   '/training/mental': typeof TrainingMentalRoute
   '/training/physical': typeof TrainingPhysicalRoute
   '/training/tactical': typeof TrainingTacticalRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/exercises/$id': typeof ExercisesIdRoute
+  '/programs/$id': typeof ProgramsIdRoute
   '/training/mental': typeof TrainingMentalRoute
   '/training/physical': typeof TrainingPhysicalRoute
   '/training/tactical': typeof TrainingTacticalRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/exercises/$id': typeof ExercisesIdRoute
+  '/programs/$id': typeof ProgramsIdRoute
   '/training/mental': typeof TrainingMentalRoute
   '/training/physical': typeof TrainingPhysicalRoute
   '/training/tactical': typeof TrainingTacticalRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/exercises/$id'
+    | '/programs/$id'
     | '/training/mental'
     | '/training/physical'
     | '/training/tactical'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/exercises/$id'
+    | '/programs/$id'
     | '/training/mental'
     | '/training/physical'
     | '/training/tactical'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/exercises/$id'
+    | '/programs/$id'
     | '/training/mental'
     | '/training/physical'
     | '/training/tactical'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExercisesIdRoute: typeof ExercisesIdRoute
+  ProgramsIdRoute: typeof ProgramsIdRoute
   TrainingMentalRoute: typeof TrainingMentalRoute
   TrainingPhysicalRoute: typeof TrainingPhysicalRoute
   TrainingTacticalRoute: typeof TrainingTacticalRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/programs'
       fullPath: '/programs/'
       preLoaderRoute: typeof ProgramsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/$id': {
+      id: '/programs/$id'
+      path: '/programs/$id'
+      fullPath: '/programs/$id'
+      preLoaderRoute: typeof ProgramsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/training/mental': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExercisesIdRoute: ExercisesIdRoute,
+  ProgramsIdRoute: ProgramsIdRoute,
   TrainingMentalRoute: TrainingMentalRoute,
   TrainingPhysicalRoute: TrainingPhysicalRoute,
   TrainingTacticalRoute: TrainingTacticalRoute,
